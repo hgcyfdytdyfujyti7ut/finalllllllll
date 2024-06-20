@@ -1,0 +1,35 @@
+.App {
+  text-align: center;
+}
+
+nav ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+nav ul li {
+  display: inline;
+  margin-right: 10px;
+}
+
+.product-card {
+  border: 1px solid #ccc;
+  padding: 16px;
+  margin: 16px;
+  cursor: pointer;
+  text-align: left;
+  max-width: 200px;
+}
+
+.product-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.cart-item {
+  border: 1px solid #ccc;
+  padding: 16px;
+  margin: 16px;
+  text-align: left;
+}
