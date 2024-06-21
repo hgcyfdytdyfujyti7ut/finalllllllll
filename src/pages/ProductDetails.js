@@ -1,33 +1,50 @@
-import React, { useEffect, useState, useContext } from "react";
-import { useParams } from "react-router-dom";
-import { fetchProductById } from "../api/fakeStore";
-import { CartContext } from "../context/CartContext";
+
+import React, { useEffect, useState, useContext } from 'react';
+import { useParams } from 'react-router-dom';
+import { fetchProductById } from '../api/fakeStore';
+import { CartContext } from '../context/CartContext';
+import { Container, Row, Col, Button, Image, Alert } from 'react-bootstrap';
 
 const ProductDetails = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
+  const [error, setError] = useState(null);
   const { addToCart } = useContext(CartContext);
 
   useEffect(() => {
     const getProduct = async () => {
       const data = await fetchProductById(id)
 ;
+      if (!data) {
+        setError('Failed to fetch product details');
+      }
       setProduct(data);
     };
 
     getProduct();
   }, [id]);
 
-  if (!product) return <div>Loading...</div>;
+  if (!product && !error) return <div>Loading...</div>;
 
   return (
-    <div>
-      <h1>{product.title}</h1>
-      <img src={product.image} alt={product.title} style={{ width: '200px' }} />
-      <p>{product.description}</p>
-      <p>${product.price}</p>
-      <button onClick={() => addToCart(product)}>Add to Cart</button>
-    </div>
+    <Container className="my-4">
+      {error && <Alert variant="danger">{error}</Alert>}
+      {product && (
+        <Row>
+          <Col md={6}>
+            <Image src={product.image} alt={product.title} fluid />
+          </Col>
+          <Col md={6}>
+            <h1>{product.title}</h1>
+            <p>{product.description}</p>
+            <h2>${product.price}</h2>
+            <Button variant="primary" onClick={() => addToCart(product)}>
+              Add to Cart
+            </Button>
+          </Col>
+        </Row>
+      )}
+    </Container>
   );
 };
 

@@ -1,12 +1,12 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Container, Alert } from 'react-bootstrap';
 
 const Home = () => {
   return (
-    <div>
-      <h1>Welcome to the Fake Store</h1>
-      <Link to="/products">View Products</Link>
-    </div>
+    <Container className="my-4 p-5 bg-light rounded shadow-sm text-center">
+      <h1>Welcome to Our E-Commerce Site</h1>
+      <p>Browse our amazing products and add them to your cart!</p>
+    </Container>
   );
 };
 
